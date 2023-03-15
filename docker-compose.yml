@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  alga_works:
+    image: postgres:11
+    container_name: alga_works
+    restart: always
+    environment:
+      - POSTGRES_DB=alga_log
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - 5432:5432
