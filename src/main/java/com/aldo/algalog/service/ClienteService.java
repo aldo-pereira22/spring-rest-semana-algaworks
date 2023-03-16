@@ -19,12 +19,10 @@ public class ClienteService {
 	
 	@Transactional
 	public Cliente salvar(Cliente cliente) {
-		
-		System.out.println("\n\n\n\n\n\nCLIENTE" + cliente);
 			boolean emailEmUso = clienteRepository.findByEmail(cliente.getEmail())
 					.stream()
 					.anyMatch(clienteExistente -> !clienteExistente.equals(cliente));
-			
+
 			if(emailEmUso) {
 				throw new NegocioException("Ja existe um cliente cadastrado com este email");
 			}

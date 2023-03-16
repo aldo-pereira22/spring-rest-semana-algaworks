@@ -24,9 +24,7 @@ import com.aldo.algalog.service.ClienteService;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-	
 
-	
 	@Autowired
 	ClienteRepository clienteRepository;
 	
@@ -54,11 +52,11 @@ public class ClienteController {
 	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
 		
 		return clienteService.salvar(cliente);
-		
+
 	}
 	
 	@PutMapping("/{clienteId}")
-	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> atualizar( @PathVariable Long clienteId, @Valid @RequestBody Cliente cliente){
 		if(!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 		}
