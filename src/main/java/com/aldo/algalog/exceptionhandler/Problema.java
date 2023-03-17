@@ -1,6 +1,7 @@
 package com.aldo.algalog.exceptionhandler;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class Problema {
 	private Integer status;
-	private LocalDate dataHora;
+	private OffsetDateTime dataHora;
 	private String titulo;
 	private List<Problema.Campo> campos;
 	

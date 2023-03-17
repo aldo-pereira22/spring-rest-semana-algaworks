@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ApiiExceptionHandler extends ResponseEntityExceptionHandler {
         }
         Problema problema = new Problema();
         problema.setStatus(status.value());
+        problema.setDataHora(OffsetDateTime.now());
         problema.setTitulo("Um ou mais campos estão inválidos");
         problema.setCampos(campos);
 
