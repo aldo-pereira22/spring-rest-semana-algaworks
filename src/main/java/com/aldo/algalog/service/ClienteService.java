@@ -16,7 +16,12 @@ import lombok.AllArgsConstructor;
 public class ClienteService {
 	
 	private ClienteRepository clienteRepository;
-	
+
+	public Cliente buscar(Long clienteId){
+		return clienteRepository.findById(clienteId)
+				.orElseThrow(() -> new NegocioException("Cliente não Encontrado!"));
+	}
+
 	@Transactional
 	public Cliente salvar(Cliente cliente) {
 			boolean emailEmUso = clienteRepository.findByEmail(cliente.getEmail())
@@ -33,6 +38,8 @@ public class ClienteService {
 	public void excluir(Long clienteId) {
 		clienteRepository.deleteById(clienteId);
 	}
+
+
 }
 
 

@@ -17,7 +17,7 @@ import java.util.List;
 @ControllerAdvice
 public class ApiiExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
-    protected @NotNull ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<Problema.Campo> campos =  new ArrayList<>();
         for(ObjectError erro : ex.getBindingResult().getAllErrors()){
             String nome = ((FieldError) erro).getField();
@@ -31,4 +31,6 @@ public class ApiiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, problema, headers, status, request);
     }
+
+
 }
