@@ -2,6 +2,7 @@ package com.aldo.algalog.mapper;
 
 
 import com.aldo.algalog.dto.EntregaDto;
+import com.aldo.algalog.dto.input.EntregaIput;
 import com.aldo.algalog.model.Entrega;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -25,5 +26,9 @@ public class EntregaMapper {
         return entregas.stream()
                 .map(this::toModel)
                 .collect(Collectors.toList());
+    }
+
+    public Entrega toEntity(EntregaIput entregaIput){
+        return modelMapper.map(entregaIput, Entrega.class);
     }
 }

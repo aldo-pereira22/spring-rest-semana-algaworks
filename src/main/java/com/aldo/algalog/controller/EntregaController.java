@@ -2,6 +2,7 @@ package com.aldo.algalog.controller;
 
 import com.aldo.algalog.dto.DestinatarioDto;
 import com.aldo.algalog.dto.EntregaDto;
+import com.aldo.algalog.dto.input.EntregaIput;
 import com.aldo.algalog.mapper.EntregaMapper;
 import com.aldo.algalog.model.Entrega;
 import com.aldo.algalog.repository.EntregaRepository;
@@ -30,8 +31,9 @@ public class EntregaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EntregaDto solicitar (@Valid @RequestBody  Entrega entrega){
-        Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(entrega);
+    public EntregaDto solicitar (@Valid @RequestBody EntregaIput entregaInput){
+        Entrega novaEntrega = entregaMapper.toEntity(entregaInput);
+        Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
         return entregaMapper.toModel(entregaSolicitada);
     }
 
