@@ -1,5 +1,6 @@
 package com.aldo.algalog.model;
 
+import com.aldo.algalog.exception.NegocioException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -62,5 +63,21 @@ public class Entrega {
 
         this.getOcorrencias().add(ocorrencia);
         return  ocorrencia;
+    }
+
+    public void finalizar(){
+        if(naoPodeSerFinalizada()){
+            throw new NegocioException("Entrega não pode ser finalizada");
+        }
+        this.setStatus(StatusEntrega.FINALIZADA);
+        this.setDataFinalizacao(OffsetDateTime.now());
+    }
+
+    public boolean podeSerFinalizada(){
+        return StatusEntrega.PENDENTE.equals(this.getStatus());
+    }
+
+    public boolean naoPodeSerFinalizada(){
+        return !podeSerFinalizada();
     }
 }

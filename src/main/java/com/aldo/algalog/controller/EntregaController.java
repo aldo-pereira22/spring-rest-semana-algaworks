@@ -6,6 +6,7 @@ import com.aldo.algalog.dto.input.EntregaIput;
 import com.aldo.algalog.mapper.EntregaMapper;
 import com.aldo.algalog.model.Entrega;
 import com.aldo.algalog.repository.EntregaRepository;
+import com.aldo.algalog.service.FinalizacaoEntregaService;
 import com.aldo.algalog.service.SolicitacaoEntregaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class EntregaController {
 
     @Autowired
     private SolicitacaoEntregaService solicitacaoEntregaService;
+
+    @Autowired
+    private FinalizacaoEntregaService finalizacaoEntregaService;
 
     @Autowired
     EntregaRepository entregaRepository;
@@ -49,5 +53,12 @@ public class EntregaController {
                     EntregaDto entregaDto = entregaMapper.toModel(entrega);
                   return ResponseEntity.ok(entregaDto);
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @PutMapping("/{entregaId}/finalizacao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalizar(@PathVariable Long entregaId){
+        finalizacaoEntregaService.finalizar(entregaId);
     }
 }
