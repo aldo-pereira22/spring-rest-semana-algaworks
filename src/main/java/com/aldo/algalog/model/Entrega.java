@@ -13,6 +13,8 @@ import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,6 +41,9 @@ public class Entrega {
     @NotNull
     private BigDecimal taxa;
 
+    @OneToMany(mappedBy = "entrega")
+    private List<Ocorrencia> ocorrencias = new ArrayList<>();
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Enumerated(EnumType.STRING)
     private StatusEntrega status;
@@ -48,4 +53,14 @@ public class Entrega {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
+
+    public Ocorrencia adicionarOcorrencia(String descricao){
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setDescricao(descricao);
+        ocorrencia.setDataRegistro(OffsetDateTime.now());
+        ocorrencia.setEntrega(this);
+
+        this.getOcorrencias().add(ocorrencia);
+        return  ocorrencia;
+    }
 }
