@@ -1,5 +1,6 @@
 package com.aldo.algalog.service;
 
+import com.aldo.algalog.exception.EntidadeNaoEncontradaException;
 import com.aldo.algalog.exception.NegocioException;
 import com.aldo.algalog.model.Entrega;
 import com.aldo.algalog.repository.EntregaRepository;
@@ -16,6 +17,6 @@ public class BuscaEntregaService {
 
     public Entrega buscar(Long entregaId) {
         return entregaRepository.findById(entregaId)
-                .orElseThrow(() -> new NegocioException("Entrega não encontrada"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Entrega não encontrada"));
     }
 }

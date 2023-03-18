@@ -41,7 +41,7 @@ public class Entrega {
     @NotNull
     private BigDecimal taxa;
 
-    @OneToMany(mappedBy = "entrega")
+    @OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL)
     private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
